@@ -1,14 +1,12 @@
+import { useDispatch } from "react-redux";
+
 import { FcHighPriority, FcAlarmClock, FcLandscape } from "react-icons/fc";
 
-const TodoItem = ({
-   id,
-   text,
-   completed,
-   date,
-   status,
-   handleToggle,
-   removeTodo,
-}) => {
+import { handleToggle, removeTodo } from "../store/todoSlice";
+
+const TodoItem = ({ id, text, completed, date, status }) => {
+   const dispatch = useDispatch();
+
    const icon = () => {
       return status == "Urgent" ? (
          <FcHighPriority />
@@ -28,10 +26,9 @@ const TodoItem = ({
             <label className="flex items-center cursor-pointer relative">
                <input
                   type="checkbox"
-                  // style={{ defaultChecked: completed }}
                   checked={completed}
                   onChange={() => {
-                     handleToggle(id);
+                     dispatch(handleToggle(id));
                   }}
                   className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-purple-600 checked:border-purple-600 mr-3"
                   id={id}
@@ -66,7 +63,7 @@ const TodoItem = ({
             </label>
             <button
                className="ms-2 text-lg font-medium"
-               onClick={() => removeTodo(id)}
+               onClick={() => dispatch(removeTodo(id))}
             >
                Delete
             </button>

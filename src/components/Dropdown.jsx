@@ -1,8 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { SlArrowDown } from "react-icons/sl";
 import { FcHighPriority, FcAlarmClock, FcLandscape } from "react-icons/fc";
 
-export default function Dropdown({ status, changeStatus }) {
+import { changeStatus } from "../store/todoSlice";
+
+export default function Dropdown() {
+   const status = useSelector((state) => state.todos.status);
+
+   const dispatch = useDispatch();
+
    return (
       <Menu
          as="div"
@@ -28,7 +36,7 @@ export default function Dropdown({ status, changeStatus }) {
                   <span
                      id="Urgent"
                      className="flex align-middle px-4 py-2 text-sm text-gray-700 cursor-pointer"
-                     onClick={() => changeStatus("Urgent")}
+                     onClick={() => dispatch(changeStatus("Urgent"))}
                   >
                      <FcHighPriority className="mr-1 h-[19px]" /> Urgent
                   </span>
@@ -37,7 +45,7 @@ export default function Dropdown({ status, changeStatus }) {
                   <span
                      id="Deferred"
                      className="flex px-4 py-2 text-sm text-gray-700 cursor-pointer"
-                     onClick={() => changeStatus("Deferred")}
+                     onClick={() => dispatch(changeStatus("Deferred"))}
                   >
                      <FcAlarmClock className="mr-1 h-[22px]" /> Deferred
                   </span>
@@ -46,7 +54,7 @@ export default function Dropdown({ status, changeStatus }) {
                   <span
                      id="Not a task"
                      className="flex px-4 py-2 text-sm text-gray-700 cursor-pointer"
-                     onClick={() => changeStatus("Not a task")}
+                     onClick={() => dispatch(changeStatus("Not a task"))}
                   >
                      <FcLandscape className="mr-1 h-[19px]" /> Not a task
                   </span>

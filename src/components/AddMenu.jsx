@@ -1,6 +1,6 @@
 import Dropdown from "./Dropdown";
 
-const AddMenu = ({ text, setText, addTodo, status, changeStatus }) => {
+const AddMenu = ({ text, setText, addTodo }) => {
    const handleKeyPress = (event) => {
       if (event.key === "Enter") {
          addTodo();
@@ -10,11 +10,7 @@ const AddMenu = ({ text, setText, addTodo, status, changeStatus }) => {
    return (
       <>
          <form className="flex justify-center flex-wrap mt-10">
-            <Dropdown
-               // id={"addDrop"}
-               status={status}
-               changeStatus={changeStatus}
-            />
+            <Dropdown />
             <input
                className="text-lg block p-2.5 mx-3"
                value={text}
